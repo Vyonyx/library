@@ -107,6 +107,11 @@ function addBookToLibrary() {
         return
     }
 
+    if (isNaN(bookPages)) {
+        alert('Enter valid number for book pages.')
+        return
+    }
+
     if (bookReadStatus == 'false') {
         myBooks.push(createBook(bookTitle, bookAuthor, bookPages, false));
     } else {
@@ -128,12 +133,6 @@ const addCardBtn = document.querySelector('.add');
 addCardBtn.addEventListener('click', toggleFormAppearance);
 
 const removeButtons = document.querySelectorAll('.remove');
-// removeButtons.forEach(btn => {
-//     btn.addEventListener('click', () => {
-//         // console.log(btn.getAttribute('data-index'));
-//         console.log('yolo');
-//     })
-// })
 
 removeButtons.forEach(btn => {btn.style.border = '5px solid black'})
 
