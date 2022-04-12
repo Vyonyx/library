@@ -60,9 +60,9 @@ function updateCards() {
         addStatus.textContent = currentStatus == 'false' ? 'Status: Still Reading' : 'Status: Finished';
         currentCard.appendChild(addStatus);
 
-        let editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.addEventListener('click', () => {
+        let statusButton = document.createElement('button');
+        statusButton.textContent = 'Status';
+        statusButton.addEventListener('click', () => {
             const editCard = document.querySelector(`[data-index="${book}"]`);
             const oldStatus = editCard.querySelector('.status');
             currentStatus = currentStatus=='false' ? 'true' : 'false';
@@ -72,7 +72,7 @@ function updateCards() {
             editStatus.textContent = currentStatus == 'false' ? 'Status: Still Reading' : 'Status: Finished';
             editCard.replaceChild(editStatus, oldStatus);
         });
-        currentCard.appendChild(editButton);
+        currentCard.appendChild(statusButton);
 
         let removeButton = document.createElement('button');
         removeButton.classList.add('remove')
