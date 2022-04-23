@@ -7,23 +7,13 @@ function toggleFormAppearance() {
     hiddenForm.style.display = hiddenForm.style.display == 'block' ? 'none' : 'block';
 }
 
-// Defining a book object.
-function Book() {
-    this.title = '',
-    this.author = ''
-    this.pages  = 0;
-    this.readStatus = false;
-}
-
-// Constructor for a new book object based on form information.
-function createBook(title, author, pages, readStatus) {
-    const newBook = new Book();
-    newBook.prototype = Object.create(Book.prototype);
-    newBook.title = title;
-    newBook.author = author;
-    newBook.pages = pages;
-    newBook.readStatus = readStatus;
-    return newBook
+class Book {
+    constructor(title, author, pages, readStatus) {
+        this.title = title
+        this.author = author
+        this.pages  = pages
+        this.readStatus = readStatus
+    }
 }
 
 // Update all cards based on changes to the myBooks list.
@@ -91,10 +81,6 @@ function updateCards() {
 }
 
 function addBookToLibrary() {
-    // Creating a new book object that will store all the information that will go on the cards.
-    let newBook = new Book();
-    newBook.prototype = Object.create(Book.prototype);
-
     // Get information from form fields.
     let bookTitle = document.querySelector('#title').value;
     let bookAuthor = document.querySelector('#author').value;
@@ -112,11 +98,8 @@ function addBookToLibrary() {
         return
     }
 
-    if (bookReadStatus == 'false') {
-        myBooks.push(createBook(bookTitle, bookAuthor, bookPages, false));
-    } else {
-        myBooks.push(createBook(bookTitle, bookAuthor, bookPages, true));
-    }
+    myBooks.push(new Book(bookTitle, bookAuthor, bookPages, bookReadStatus == 'false' ? false: true))
+
     updateCards();
     toggleFormAppearance();
 
@@ -135,4 +118,3 @@ addCardBtn.addEventListener('click', toggleFormAppearance);
 const removeButtons = document.querySelectorAll('.remove');
 
 removeButtons.forEach(btn => {btn.style.border = '5px solid black'})
-
